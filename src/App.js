@@ -18,7 +18,7 @@ function App() {
         <p>hello world</p>
         <div class='nav-menu'>
         <Link to ="/projects">
-            <button type="button">products</button>
+            <button type="button">Projects</button>
           </Link>
         </div>
 

@@ -1,25 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import Login from './components/Login';
+import TestProduct from './components/test-product';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 function App() {
+  const [token, setToken] = useState();
+
+  // Login menu will show if user is not logged in regardless of url path
+  if (!token) {
+    return <Login setToken={setToken} />
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <div className="App">
+        <p>hello world</p>
+        <div class='nav-menu'>
+        <Link to ="/products">
+            <button type="button">products</button>
+          </Link>
+        </div>
+
+        {/* Start of routes view */}
+        <div class="content">
+          <Routes>
+            <Route path="/products" element={<TestProduct />}/> 
+            {/* <Route path="/dashboard" element={<Dashboard />}/>  */}
+
+            {/* <Route path="/url_path_name" element={<COMPONENT_NAME />}/>  */}
+          </Routes>
+        </div>
+      </div> {/*closing div*/}
+    </Router>  
+  )
 }
 
 export default App;

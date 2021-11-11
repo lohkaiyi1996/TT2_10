@@ -7,6 +7,11 @@ export default function showExpenses() {
   var data = require ('../data/expense.json');
   console.log(data);
 
+  axios.get('http://localhost:5001/expenses')
+            .then((res) => {
+                console.log(res.data);
+                this.setState({data:res.data});
+            })
 
   return (
       <div>

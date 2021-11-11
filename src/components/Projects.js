@@ -8,6 +8,12 @@ export default function Projects() {
   console.log(data);
   var [showDiv, setShowDiv] = useState(false);
   
+  axios.get('http://localhost:5001/projects')
+  .then((res) => {
+      console.log(res.data);
+      this.setState({data:res.data});
+  })
+
   if(showDiv === true) {
     return <ExpensesFunction showDiv = {showDiv}/>
   }

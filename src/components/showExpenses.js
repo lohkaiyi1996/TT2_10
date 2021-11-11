@@ -10,10 +10,10 @@ export default function showExpenses() {
 
   return (
       <div>
-          <p>This is project component</p>
+          <p>This is showExpenses component</p>
           <ul>
             {data.map(expense => 
-              <li key={expense.id}>Name: {expense.name}, Description: {expense.description}, Amount: {expense.amount} 
+              <li key={expense.id}>Name: {expense.name},&nbsp;&nbsp;&nbsp; Description: {expense.description},&nbsp;&nbsp;&nbsp; Amount: {expense.amount} &nbsp;&nbsp;&nbsp;
               <button >View Project</button>
               <button>dummy delete</button>
               </li>)} 

@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
+
 // async function loginUser(credentials) {
-//     return fetch('http://localhost:8080/login', {
+//     return fetch('http://localhost:5001/login', {
 //         method: 'POST',
 //         headers: {
 //             'Content-Type': 'application/json'
@@ -12,18 +13,22 @@ import PropTypes from 'prop-types';
 //           .then(data => data.json())
 // }
 
-export default function Login({setToken}) {
+export default function Login({setToken, setUserId}) {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
     
     const handleSubmit = async e => {
         e.preventDefault();
-        // const token = await loginUser({
+        // const data = await loginUser({
         //     username,
         //     password
         // });
-        var token = 'test123';  //hard code at first for testing
-        setToken(token);
+        var data = {
+            "token": 'test123',
+            "userId": 'User 1'
+        };  //hard code at first for testing
+        setToken(data.token);
+        setUserId(data.userId);
     }
 
     return(

@@ -17,9 +17,9 @@ export default function Projects() {
           <p>This is project component</p>
           <ul>
             {data.map(project => 
-              <li key={project.id}>Name: {project.name}, Description: {project.description}, Budget: {project.budget} 
+              <li key={project.id}>Name: {project.name},&nbsp;&nbsp;&nbsp; Description: {project.description},&nbsp;&nbsp;&nbsp; Budget: {project.budget} &nbsp;&nbsp;&nbsp;
               <button onClick ={() => setShowDiv(showDiv = !showDiv)} >View Project</button>
-              <button>dummy delete</button>
+              
               </li>)} 
           </ul>
           

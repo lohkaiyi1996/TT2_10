@@ -8,16 +8,16 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 function App() {
   const [token, setToken] = useState();
+  const [userId, setUserId] = useState();
 
   // Login menu will show if user is not logged in regardless of url path
   if (!token) {
-    return <Login setToken={setToken} />
+    return <Login setToken={setToken} setUserId={setUserId}/>
   }
 
   return (
     <Router>
       <div className="App">
-        <p>hello world</p>
         <div class='nav-menu'>
         <Link to ="/home">
             <button type="button">Home</button>

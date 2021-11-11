@@ -40,7 +40,8 @@ namespace API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });
             services.AddCors();
-            var key = Encoding.ASCII.GetBytes("thisisasecret");
+            // TODO: refactoring secrret key into appsettings.json
+            var key = Encoding.ASCII.GetBytes("thisisasecretthisisasecretthisisasecretthisisasecret");
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

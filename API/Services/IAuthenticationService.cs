@@ -32,7 +32,7 @@ namespace API.Services
         public AuthenticationService(DataContext context)
         {
             _context = context;
-            _secret = "thisisasecret";
+            _secret = "thisisasecretthisisasecretthisisasecretthisisasecret";
         }
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model, string ipAddress)

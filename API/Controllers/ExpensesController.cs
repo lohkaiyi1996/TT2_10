@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 namespace API.Controllers
 {
     [ApiController]
@@ -15,8 +17,8 @@ namespace API.Controllers
         // GET /expenses
         [HttpGet]
         public List<Expense> GetExpenses()
-        {   
-            expenses = getAllExpensesFromDB() // function not written yet, change accordingly
+        {
+            expenses = getAllExpensesFromDB(); // function not written yet, change accordingly
             return expenses;
         }
 
@@ -26,10 +28,10 @@ namespace API.Controllers
         public ActionResult AddExpense(Expense expense)
         {
             if (expense is valid) // syntax? 
-            {   
-                expenses = getAllExpensesFromDB() // function not written yet, change accordingly
+            {
+                expenses = getAllExpensesFromDB(); // function not written yet, change accordingly
                 // add expense
-                expenses.add(Expense)
+                expenses.add(Expense);
                 updateAllExpensesInDB(); // function not written yet, change accordingly
 
                 return Ok();
@@ -42,8 +44,8 @@ namespace API.Controllers
         // DELETE /expenses/{id}
         [HttpDelete("{id}")]
         public ActionResult DeleteExpense([FromRoute] string id){
-            
-            targetExpense = getExpenseFromDB(id=id) // function not written yet, change accordingly
+
+            targetExpense = getExpenseFromDB(id = id); // function not written yet, change accordingly
             if (targetExpense is null){
                 return NotFound();
             }
@@ -56,13 +58,13 @@ namespace API.Controllers
         // PUT /expenses/{id}
         [HttpPut("{id}")]
         public ActionResult UpdateExpense([FromRoute] string id, [FromBody] Expense newExpense)
-        {   
-            targetExpense = getExpenseFromDB(id=id) // function not written yet, change accordingly
+        {
+            targetExpense = getExpenseFromDB(id = id); // function not written yet, change accordingly
             if (targetExpense is null){
                 return NotFound();
             }
 
-            targetExpense = newExpense
+            targetExpense = newExpense;
 
             updateExpenseInDB(id=id); // function not written yet, change accordingly
 

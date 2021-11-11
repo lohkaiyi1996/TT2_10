@@ -7,23 +7,12 @@ export default function ExpenseList({ allExpense, handleDelete, editExpense }) {
         <li key={id}>
           <div>
             {title}&nbsp;&nbsp;&nbsp;
-            <input type="text" value={editExpense.title || ""}/>
-            {!editExpense.title ? null : (
-            <>
-            <div>
-            <textarea
-            name="description"
-            placeholder="Expense value"
-            value={editExpense.description || ""}
-            />
-          </div>
-          <button type="submit">Edit Expense</button>
-        </>
-      )}
+            <input type="text"/>
+            <button>Edit </button>
             <button onClick={() => handleDelete(id)}>X</button>
           </div>
           {!description ? null : <p>{description}</p>}
-        </li>
+          </li>
       ))}
     </ul>
   );

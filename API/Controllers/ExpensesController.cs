@@ -11,7 +11,7 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("expenses")]
-    //[Authorize]
+    [Authorize]
     public class ExpensesController : ControllerBase
     {
         private readonly IExpensesService _expenseService;

@@ -5,11 +5,11 @@ namespace API.Controllers
     public class ProjectsController : ControllerBase
     {
 
-        private Projects projects; // change class accordingly
+        private List<Project> projects; // change class accordingly
 
         public ProjectsController()
         {
-            projects = new Projects();  // change class accordingly
+            projects = new List<Project>();  // change class accordingly
         }
 
         // Get /projects
@@ -17,7 +17,13 @@ namespace API.Controllers
         public List<Project> GetProjects()
         {
             // var projects = getProjectsFromDB ();
+            new NotFound();
             return projects;
+        }
+
+        public string Test()
+        {
+            return "Hello";
         }
     }
 }

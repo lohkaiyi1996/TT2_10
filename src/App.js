@@ -26,6 +26,9 @@ function App() {
         <div class="content">
           <Routes>
             <Route path="/products" element={<TestProduct />}/> 
+            {/* <Route path="/dashboard" element={<Dashboard />}/>  */}
+
+            {/* <Route path="/url_path_name" element={<COMPONENT_NAME />}/>  */}
           </Routes>
         </div>
       </div> {/*closing div*/}

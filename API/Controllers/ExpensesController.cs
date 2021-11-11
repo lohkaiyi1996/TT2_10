@@ -1,3 +1,4 @@
+using API.Dto;
 using API.Models;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -66,7 +67,7 @@ namespace API.Controllers
         // TASK 5
         // PUT /expenses/{id}
         [HttpPut("{id}")]
-        public ActionResult UpdateExpense([FromRoute] int id, [FromBody] Expense newExpense)
+        public ActionResult UpdateExpense([FromRoute] int id, [FromBody] ExpenseUpdateDto newExpense)
         {
             try
             {
@@ -74,8 +75,21 @@ namespace API.Controllers
 
                 if (expense == null) return NotFound();
 
+                var model = new Expense()
+                {
+                    Id = id,
+                    CategoryId = newExpense.CategoryId,
+                    ProjectId = newExpense.ProjectId,
+                    Name = newExpense.Name,
+                    Description = newExpense.Description,
+                    Amount = newExpense.Amount,
+                    CreatedAt = newExpense.CreatedAt,
+                    CreatedBy = newExpense.CreatedBy,
+                    UpdatedAt = newExpense.UpdatedAt,
+                    UpdatedBy = newExpense.UpdatedBy
+                };
 
-                var update = _expenseService.UpdateExpense(newExpense);
+                var update = _expenseService.UpdateExpense(model);
 
                 return update ? NoContent() : Problem("Unable to update");
             } 

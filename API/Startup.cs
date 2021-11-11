@@ -71,6 +71,7 @@ namespace API
 
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IExpensesService, ExpensesService>();
+            services.AddScoped<IProjectService, ProjectService>();
 
         }
 

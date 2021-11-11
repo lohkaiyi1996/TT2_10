@@ -1,6 +1,6 @@
 import './App.css';
 import Login from './components/Login';
-import TestProduct from './components/test-product';
+import Projects from './components/Projects';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ function App() {
       <div className="App">
         <p>hello world</p>
         <div class='nav-menu'>
-        <Link to ="/products">
+        <Link to ="/projects">
             <button type="button">products</button>
           </Link>
         </div>
@@ -25,7 +25,7 @@ function App() {
         {/* Start of routes view */}
         <div class="content">
           <Routes>
-            <Route path="/products" element={<TestProduct />}/> 
+            <Route path="/projects" element={<Projects />}/> 
             {/* <Route path="/dashboard" element={<Dashboard />}/>  */}
 
             {/* <Route path="/url_path_name" element={<COMPONENT_NAME />}/>  */}

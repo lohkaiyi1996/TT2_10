@@ -1,12 +1,15 @@
 using API.Models;
 using API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace API.Controllers
 {
     [ApiController]
     [Route("expenses")]
+    //[Authorize]
     public class ExpensesController : ControllerBase
     {
         private readonly IExpensesService _expenseService;
@@ -19,9 +22,20 @@ namespace API.Controllers
         // TASK 4
         // GET /expenses
         [HttpGet]
-        public IEnumerable<Expense> GetExpenses()
+        public ActionResult<IEnumerable<Expense>> GetExpenses()
         {
-            return _expenseService.GetAllExpensesFromDb();
+            try
+            {
+                return Ok(_expenseService.GetAllExpensesFromDb());
+            } 
+            catch(Exception e)
+            {
+                if(e.InnerException != null)
+                {
+                    return Problem(e.InnerException.Message);
+                }
+                return Problem(e.Message);
+            }
         }
 
         // TASK 3
@@ -29,12 +43,23 @@ namespace API.Controllers
         [HttpPut]
         public ActionResult AddExpense(Expense expense)
         {
-            if (expense != null) // syntax? 
+            try
             {
-                var update = _expenseService.AddExpense(expense);
-                return update ? NoContent() : Problem();
+                if (expense != null) // syntax? 
+                {
+                    var update = _expenseService.AddExpense(expense);
+                    return update ? NoContent() : Problem();
+                }
+                return BadRequest();
+            } 
+            catch(Exception e)
+            {
+                if (e.InnerException != null)
+                {
+                    return Problem(e.InnerException.Message);
+                }
+                return Problem(e.Message);
             }
-            return BadRequest();
         }
 
 
@@ -43,21 +68,46 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateExpense([FromRoute] int id, [FromBody] Expense newExpense)
         {
-            var expense = _expenseService.GetExpense(id);
+            try
+            {
+                var expense = _expenseService.GetExpense(id);
 
-            if (expense == null) return NotFound();
+                if (expense == null) return NotFound();
 
 
-            var update = _expenseService.UpdateExpense(newExpense);
+                var update = _expenseService.UpdateExpense(newExpense);
 
-            return update ? NoContent() : Problem();
+                return update ? NoContent() : Problem("Unable to update");
+            } 
+            catch(Exception e)
+            {
+                if (e.InnerException != null)
+                {
+                    return Problem(e.InnerException.Message);
+                }
+
+                return Problem(e.Message);
+            }
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteExpense([FromRoute] int id)
         {
-            var delete = _expenseService.DeleteExpense(id);
-            return delete ? NoContent() : Problem();        }
+            try
+            {
+                var delete = _expenseService.DeleteExpense(id);
+                return delete ? NoContent() : Problem();
+            }
+            catch(Exception e)
+            {
+                if (e.InnerException != null)
+                {
+                    return Problem(e.InnerException.Message);
+                }
+
+                return Problem(e.Message);
+            }
+         }
 
 
     }

@@ -14,8 +14,8 @@ export default function showExpenses() {
           <ul>
             {data.map(expense => 
               <li key={expense.id}>Name: {expense.name},&nbsp;&nbsp;&nbsp; Description: {expense.description},&nbsp;&nbsp;&nbsp; Amount: {expense.amount} &nbsp;&nbsp;&nbsp;
-              <button >View Project</button>
-              <button>dummy delete</button>
+              <button >Edit</button>
+              <button>Delete</button>
               </li>)} 
           </ul>
           

@@ -23,7 +23,7 @@ namespace API.Controllers
         // TASK 3
         // PUT /expenses
         [HttpPut]
-        public ActionResult AddExpense(Expense expense):
+        public ActionResult AddExpense(Expense expense)
         {
             if (expense is valid) // syntax? 
             {   
@@ -38,10 +38,24 @@ namespace API.Controllers
         }
         
 
+        // TASK 6 
+        // DELETE /expenses/{id}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteExpense([FromRoute] string id){
+            
+            targetExpense = getExpenseFromDB(id=id) // function not written yet, change accordingly
+            if (targetExpense is null){
+                return NotFound();
+            }
+
+            deleteExpenseFromDB(id=id);
+            return Ok();
+        }
+
         // TASK 5
         // PUT /expenses/{id}
         [HttpPut("{id}")]
-        public ActionResult UpdateExpense(string id, Expense newExpense):
+        public ActionResult UpdateExpense([FromRoute] string id, [FromBody] Expense newExpense)
         {   
             targetExpense = getExpenseFromDB(id=id) // function not written yet, change accordingly
             if (targetExpense is null){
@@ -52,10 +66,10 @@ namespace API.Controllers
 
             updateExpenseInDB(id=id); // function not written yet, change accordingly
 
-            return Ok()
+            return Ok();
 
         }
 
-
-    }
+        
+    }   
 }

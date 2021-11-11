@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
+
 namespace API.Controllers
 {
     [ApiController]
@@ -74,6 +75,7 @@ namespace API.Controllers
                 var expense = _expenseService.GetExpense(id);
 
                 if (expense == null) return NotFound();
+
 
                 var model = new Expense()
                 {

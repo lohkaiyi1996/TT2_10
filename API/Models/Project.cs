@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace API.Models
 {
-
+   
     public class ProjectContext : DbContext
     {
         public ProjectContext(DbContextOptions<ProjectContext> contextOptions) : base(contextOptions)
@@ -32,6 +32,7 @@ namespace API.Models
         public DbSet<Project> Projects { get; set; }
     }
 
+    [Table("project")]
     public class Project
     {
         public int Id { get; set; }

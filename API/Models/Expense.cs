@@ -35,6 +35,8 @@ namespace API.Models
         public DbSet<Expense> Expenses { get; set; }
 
     }
+    
+    [Table("expense")]
     public class Expense
     {
         public int Id { get; set; }

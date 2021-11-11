@@ -70,6 +70,7 @@ namespace API
                 options => options.UseMySQL("server=128.199.92.91; port=3306; database=project_expenses; user=backend; password=backend"));
 
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IExpensesService, ExpensesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

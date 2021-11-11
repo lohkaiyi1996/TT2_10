@@ -12,7 +12,7 @@ namespace API.Controllers
     [Route("api/v1/[controller]")]
     public class CategoryController : ControllerBase
     {
-        private ICategoryService _context;
+        private readonly ICategoryService _context;
         public CategoryController(ICategoryService context)
         {
             _context = context;

@@ -1,58 +1,55 @@
+using API.Models;
+using API.Services;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+
 namespace API.Controllers
 {
     [ApiController]
     [Route("expenses")]
     public class ExpensesController : ControllerBase
     {
-        private List<Expense> expenses; // change class accordingly
+        private readonly IExpensesService _expenseService; 
 
-        public ExpenseController()
+        public ExpensesController(IExpensesService  expensesService) 
         {
-            
+            this._expenseService = expensesService;
         }
 
         // TASK 4
         // GET /expenses
         [HttpGet]
-        public List<Expense> GetExpenses()
-        {   
-            expenses = getAllExpensesFromDB() // function not written yet, change accordingly
-            return expenses;
+        public IEnumerable<Expense> GetExpenses()
+        {
+            return _expenseService.GetAllExpensesFromDb();
         }
 
         // TASK 3
         // PUT /expenses
         [HttpPut]
-        public ActionResult AddExpense(Expense expense):
+        public ActionResult AddExpense(Expense expense)
         {
-            if (expense is valid) // syntax? 
-            {   
-                expenses = getAllExpensesFromDB() // function not written yet, change accordingly
-                // add expense
-                expenses.add(Expense)
-                updateAllExpensesInDB(); // function not written yet, change accordingly
-
-                return Ok();
+            if (expense != null) // syntax? 
+            {
+                var update = _expenseService.AddExpense(expense);
+                return update ? NoContent() : Problem();
             }
-            return Invalid(); // This is probably incorrect
+            return BadRequest();
         }
         
 
         // TASK 5
         // PUT /expenses/{id}
         [HttpPut("{id}")]
-        public ActionResult UpdateExpense(string id, Expense newExpense):
-        {   
-            targetExpense = getExpenseFromDB(id=id) // function not written yet, change accordingly
-            if (targetExpense is null){
-                return NotFound();
-            }
+        public ActionResult UpdateExpense(string id, Expense newExpense)
+        {
+            var expense = _expenseService.GetExpense(id);
 
-            targetExpense = newExpense
+            if (expense == null) return NotFound();
 
-            updateExpenseInDB(id=id); // function not written yet, change accordingly
+            var update = _expenseService.UpdateExpense(newExpense);
 
-            return Ok()
+            return update ? NoContent() : Problem();
 
         }
 

@@ -13,7 +13,7 @@ namespace API.Services
 
     public class CategoryService : ICategoryService
     {
-        private CategoryContext _context;
+        private readonly CategoryContext _context;
 
         public CategoryService(CategoryContext context)
         {

@@ -1,5 +1,6 @@
 namespace API.Controllers
 {
+    /*
     [ApiController]
     [Route("projects")]
     public class ProjectsController : ControllerBase
@@ -27,5 +28,6 @@ namespace API.Controllers
         {
             return "Hello";
         }
-    }
+
+    } */
 }

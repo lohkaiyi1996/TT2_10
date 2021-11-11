@@ -1,3 +1,10 @@
+## SQL database credentials
+
+Host: 128.199.92.91
+user: backend
+password: backend
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

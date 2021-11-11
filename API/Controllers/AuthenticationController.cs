@@ -15,9 +15,9 @@ namespace API.Controllers
     [Route("api/v1/[controller]")]
     public class AuthenticationController : ControllerBase
     {
-        private IAuthenticationService _authService;
+        private AuthenticationService _authService;
 
-        public AuthenticationController(IAuthenticationService authService)
+        public AuthenticationController(AuthenticationService authService)
         {
             _authService = authService;
         }
@@ -30,8 +30,6 @@ namespace API.Controllers
 
             if (response == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
-
-            setTokenCookie(response.RefreshToken);
 
             return Ok(response);
         }

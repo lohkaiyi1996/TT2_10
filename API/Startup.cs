@@ -12,14 +12,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.InMemory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static API.Models.Authentication.AuthenticateResponse;
 
 namespace API
 {
@@ -35,7 +32,6 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => x.UseInMemoryDatabase("TestDb"));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -62,7 +58,7 @@ namespace API
                 };
             });
 
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<AuthenticationService, AuthenticationService>();
 
             services.AddDbContext<CategoryContext>(
                 options => options.UseMySQL("server=128.199.92.91; port=3306; database=project_expenses; user=backend; password=backend"));
@@ -77,7 +73,7 @@ namespace API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
             if (env.IsDevelopment())

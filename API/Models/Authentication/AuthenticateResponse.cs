@@ -14,28 +14,12 @@ namespace API.Models.Authentication
         public string Appointment { get; set; }
         public string JwtToken { get; set; }
 
-        [JsonIgnore]
-        public string RefreshToken { get; set; }
-
-        public AuthenticateResponse(User user, string jwtToken, string refreshToken)
+        public AuthenticateResponse(User user, string jwtToken)
         {
             Id = user.Id;
             Name = user.Name;
             Appointment = user.Appointment;
             JwtToken = jwtToken;
-            RefreshToken = refreshToken;
-        }
-
-        // Placeholder class for User entities
-        public class User
-        {
-            public int Id { get; set; }
-            public string Username { get; set; }
-            public string Password { get; set; }
-            public string Name { get; set; }
-            public string Appointment { get; set; }
-
-            public List<RefreshToken> RefreshTokens { get; set; }
         }
     }
 }

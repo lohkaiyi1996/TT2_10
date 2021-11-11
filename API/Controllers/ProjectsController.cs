@@ -9,18 +9,19 @@ namespace API.Controllers
 
         public ProjectsController()
         {
-            projects = new List<Project>();  // change class accordingly
+            projects = getProjectsFromDB(); 
         }
 
         // Get /projects
         [HttpGet]
         public List<Project> GetProjects()
         {
-            // var projects = getProjectsFromDB ();
-            new NotFound();
             return projects;
         }
 
+
+        // GET /projects/test
+        [HttpGet("test")]
         public string Test()
         {
             return "Hello";

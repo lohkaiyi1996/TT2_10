@@ -1,25 +1,43 @@
+using API.Dto;
+using API.Models;
+using API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+
 
 namespace API.Controllers
 {
     [ApiController]
     [Route("expenses")]
+    [Authorize]
     public class ExpensesController : ControllerBase
     {
-        private List<Expense> expenses; // change class accordingly
+        private readonly IExpensesService _expenseService;
 
-        public ExpenseController()
+        public ExpensesController(IExpensesService expensesService)
         {
-            
+            this._expenseService = expensesService;
         }
 
         // TASK 4
         // GET /expenses
         [HttpGet]
-        public List<Expense> GetExpenses()
-        {   
-            expenses = getAllExpensesFromDB() // function not written yet, change accordingly
-            return expenses;
+        public ActionResult<IEnumerable<Expense>> GetExpenses()
+        {
+            try
+            {
+                return Ok(_expenseService.GetAllExpensesFromDb());
+            } 
+            catch(Exception e)
+            {
+                if(e.InnerException != null)
+                {
+                    return Problem(e.InnerException.Message);
+                }
+                return Problem(e.Message);
+            }
         }
 
         // TASK 3
@@ -27,36 +45,85 @@ namespace API.Controllers
         [HttpPut]
         public ActionResult AddExpense(Expense expense)
         {
-            if (expense is valid) // syntax? 
-            {   
-                expenses = getAllExpensesFromDB() // function not written yet, change accordingly
-                // add expense
-                expenses.add(Expense)
-                updateAllExpensesInDB(); // function not written yet, change accordingly
-
-                return Ok();
+            try
+            {
+                if (expense != null) // syntax? 
+                {
+                    var update = _expenseService.AddExpense(expense);
+                    return update ? NoContent() : Problem();
+                }
+                return BadRequest();
+            } 
+            catch(Exception e)
+            {
+                if (e.InnerException != null)
+                {
+                    return Problem(e.InnerException.Message);
+                }
+                return Problem(e.Message);
             }
-            return Invalid(); // This is probably incorrect
         }
-        
+
 
         // TASK 5
         // PUT /expenses/{id}
         [HttpPut("{id}")]
-        public ActionResult UpdateExpense(string id, Expense newExpense)
-        {   
-            targetExpense = getExpenseFromDB(id=id) // function not written yet, change accordingly
-            if (targetExpense is null){
-                return NotFound();
+        public ActionResult UpdateExpense([FromRoute] int id, [FromBody] ExpenseUpdateDto newExpense)
+        {
+            try
+            {
+                var expense = _expenseService.GetExpense(id);
+
+                if (expense == null) return NotFound();
+
+
+                var model = new Expense()
+                {
+                    Id = id,
+                    CategoryId = newExpense.CategoryId,
+                    ProjectId = newExpense.ProjectId,
+                    Name = newExpense.Name,
+                    Description = newExpense.Description,
+                    Amount = newExpense.Amount,
+                    CreatedAt = newExpense.CreatedAt,
+                    CreatedBy = newExpense.CreatedBy,
+                    UpdatedAt = newExpense.UpdatedAt,
+                    UpdatedBy = newExpense.UpdatedBy
+                };
+
+                var update = _expenseService.UpdateExpense(model);
+
+                return update ? NoContent() : Problem("Unable to update");
+            } 
+            catch(Exception e)
+            {
+                if (e.InnerException != null)
+                {
+                    return Problem(e.InnerException.Message);
+                }
+
+                return Problem(e.Message);
             }
-
-            targetExpense = newExpense
-
-            updateExpenseInDB(id=id); // function not written yet, change accordingly
-
-            return Ok()
-
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteExpense([FromRoute] int id)
+        {
+            try
+            {
+                var delete = _expenseService.DeleteExpense(id);
+                return delete ? NoContent() : Problem();
+            }
+            catch(Exception e)
+            {
+                if (e.InnerException != null)
+                {
+                    return Problem(e.InnerException.Message);
+                }
+
+                return Problem(e.Message);
+            }
+         }
 
 
     }

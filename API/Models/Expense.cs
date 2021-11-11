@@ -35,6 +35,8 @@ namespace API.Models
         public DbSet<Expense> Expenses { get; set; }
 
     }
+    
+    [Table("expense")]
     public class Expense
     {
         public int Id { get; set; }
@@ -48,6 +50,6 @@ namespace API.Models
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public DateTime UpdatedBy { get; set; }
+        public string UpdatedBy { get; set; }
     }
 }

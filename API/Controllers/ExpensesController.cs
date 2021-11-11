@@ -9,9 +9,9 @@ namespace API.Controllers
     [Route("expenses")]
     public class ExpensesController : ControllerBase
     {
-        private readonly IExpensesService _expenseService; 
+        private readonly IExpensesService _expenseService;
 
-        public ExpensesController(IExpensesService  expensesService) 
+        public ExpensesController(IExpensesService expensesService)
         {
             this._expenseService = expensesService;
         }
@@ -36,22 +36,28 @@ namespace API.Controllers
             }
             return BadRequest();
         }
-        
+
 
         // TASK 5
         // PUT /expenses/{id}
         [HttpPut("{id}")]
-        public ActionResult UpdateExpense(int id, Expense newExpense)
+        public ActionResult UpdateExpense([FromRoute] int id, [FromBody] Expense newExpense)
         {
             var expense = _expenseService.GetExpense(id);
 
             if (expense == null) return NotFound();
 
+
             var update = _expenseService.UpdateExpense(newExpense);
 
             return update ? NoContent() : Problem();
-
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteExpense([FromRoute] int id)
+        {
+            var delete = _expenseService.DeleteExpense(id);
+            return delete ? NoContent() : Problem();        }
 
 
     }

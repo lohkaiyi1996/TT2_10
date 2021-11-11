@@ -13,6 +13,7 @@ namespace API.Services
         bool AddExpense(Expense expense);
         bool UpdateExpense(Expense expense);
         Expense GetExpense(int id);
+        bool DeleteExpense(int id);
     }
     public class ExpensesService : IExpensesService
     {
@@ -58,6 +59,21 @@ namespace API.Services
 
             return result >= 1;
 
+        }
+
+        public bool DeleteExpense(int id)
+        {
+            var expense = new Expense()
+            {
+                Id = id
+            };
+
+            _expenseContext.Expenses.Attach(expense);
+            _expenseContext.Expenses.Remove(expense);
+            
+            var result = _expenseContext.SaveChanges();
+
+            return result >= 1;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace API.Controllers
         // TASK 3
         // PUT /expenses
         [HttpPut]
-        public ActionResult AddExpense(Expense expense):
+        public ActionResult AddExpense(Expense expense)
         {
             if (expense is valid) // syntax? 
             {   
@@ -43,7 +43,7 @@ namespace API.Controllers
         // TASK 5
         // PUT /expenses/{id}
         [HttpPut("{id}")]
-        public ActionResult UpdateExpense(string id, Expense newExpense):
+        public ActionResult UpdateExpense(string id, Expense newExpense)
         {   
             targetExpense = getExpenseFromDB(id=id) // function not written yet, change accordingly
             if (targetExpense is null){

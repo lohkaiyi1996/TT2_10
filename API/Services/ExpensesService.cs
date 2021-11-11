@@ -12,7 +12,7 @@ namespace API.Services
         IEnumerable<Expense> GetAllExpensesFromDb();
         bool AddExpense(Expense expense);
         bool UpdateExpense(Expense expense);
-        Expense GetExpense(string id);
+        Expense GetExpense(int id);
     }
     public class ExpensesService : IExpensesService
     {
@@ -22,7 +22,7 @@ namespace API.Services
             _expenseContext = expenseContext;
         }
 
-        public Expense GetExpense(string id)
+        public Expense GetExpense(int id)
         {
             var expense = _expenseContext.Expenses.Find(id);
 

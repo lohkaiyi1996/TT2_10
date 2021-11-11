@@ -41,7 +41,7 @@ namespace API.Controllers
         // TASK 5
         // PUT /expenses/{id}
         [HttpPut("{id}")]
-        public ActionResult UpdateExpense(string id, Expense newExpense)
+        public ActionResult UpdateExpense(int id, Expense newExpense)
         {
             var expense = _expenseService.GetExpense(id);
 

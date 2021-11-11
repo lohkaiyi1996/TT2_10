@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 
 namespace API.Models
 {
-    public class User
+    public class Project
     {
         public int Id { get; set; }
-        public string Username { get; set; } 
-        public string Password { get; set; }
+        public int User_id { get; set; }
         public string Name { get; set; }
-        public string Appointment { get; set; }
-
+        public string Description { get; set; }
+        public double Budget { get; set; }
     }
 }

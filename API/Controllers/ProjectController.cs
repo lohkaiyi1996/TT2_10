@@ -1,10 +1,12 @@
 using API.Models;
 using API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("projects")]
     public class ProjectController : ControllerBase

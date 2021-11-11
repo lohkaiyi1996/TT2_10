@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Expenses from "../ExpensesFunction";
 
 export default function Projects() {
   var data = require ('../data/project.json');
@@ -10,7 +11,7 @@ export default function Projects() {
           <ul>
             {data.map(project => 
               <li key={project.id}>Name: {project.name}, Description: {project.description}, Budget: {project.budget} 
-              <button>dummy edit</button>
+              <button onClick = {Expenses}>dummy edit</button>
               <button>dummy delete</button>
               </li>)} 
           </ul>

@@ -1,38 +1,64 @@
-import React, { useState } from "react";
-import NewExpenses from "./NewExpense"
+import React, { useState, Component } from "react";
+import NewExpense from "./NewExpense"
 import ExpenseList from "./ExpenseList";
 
-export default function AppFunction() {
-  //submit button
-  const [allExpense, setAllExpense] = useState([]);
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (!newExpense.title) return;
-    setAllExpense((prev) => [newExpense, ...prev]);
-    setNewExpense({});
-  };
-  //delete button
-  const handleDelete = (taskIdToRemove) => {
-    setAllExpense((prev) => prev.filter(
-      (task) => task.id !== taskIdToRemove
-    ));
-  };
-  //changes
-  const [newExpense, setNewExpense] = useState({});
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-    setNewExpense((prev) => ({ ...prev, id: Date.now(), [name]: value }));
-  };
 
-  return (
-    <main>
-      <h1>Expenses </h1>
-      <NewExpenses
-        newExpense={newExpense}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-      />
-      <ExpenseList allExpense={allExpense} handleDelete={handleDelete} />
-    </main>
-  );
+
+
+export default class ExpenseClass extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      newExpense: {},
+      allExpense: []
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleChange({ target }){
+    const { name, value } = target;
+    this.setState((prevState) => ({
+      ...prevState,
+      newExpense: {
+        ...prevState.newExpense,
+        [name]: value,
+        id: Date.now()
+      }
+    }));
+  }
+
+  handleSubmit(event){
+    event.preventDefault();
+    if (!this.state.newExpense.title) return;
+    this.setState((prevState) => ({
+      allExpense: [prevState.newExpense, ...prevState.allExpense],
+      newExpense: {}
+    }));
+  }
+
+  handleDelete(taskIdToRemove){
+    this.setState((prevState) => ({
+      ...prevState,
+      allExpense: prevState.allExpense.filter((task) => task.id !== taskIdToRemove)
+    }));
+  }
+
+  render() {
+    return (
+      <main>
+        <h1>Tasks</h1>
+        <NewExpense
+          newExpense={this.state.newExpense}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+        />
+        <ExpenseList
+          allExpense={this.state.allExpense}
+          handleDelete={this.handleDelete}
+        />
+      </main>
+    );
+  }
 }

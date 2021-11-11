@@ -9,13 +9,14 @@ namespace API.Controllers
 
         public ProjectsController()
         {
-            projects = getProjectsFromDB(); 
         }
 
+        // TASK 2
         // Get /projects
         [HttpGet]
         public List<Project> GetProjects()
         {
+            projects = getAllProjectsFromDB(); // function not written yet, change accordingly
             return projects;
         }
 

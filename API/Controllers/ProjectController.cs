@@ -7,12 +7,12 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("projects")]
-    public class ProjectsController : ControllerBase
+    public class ProjectController : ControllerBase
     {
 
-        private IProjectsService _context;
+        private IProjectService _context;
 
-        public ProjectsController(IProjectsService context)
+        public ProjectController(IProjectService context)
         {
             _context = context;
         }

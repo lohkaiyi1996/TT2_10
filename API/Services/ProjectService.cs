@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace API.Services
 {
-    public interface IProjectsService
+    public interface IProjectService
     {
         IEnumerable<Project> GetAll();
     }
 
-    public class ProjectsService : IProjectsService
+    public class ProjectService : IProjectService
     {
         private ProjectContext _context;
 
-        public ProjectsService(ProjectContext context)
+        public ProjectService(ProjectContext context)
         {
             _context = context;
         }

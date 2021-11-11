@@ -24,13 +24,5 @@ namespace API.Controllers
         {
             return Ok(_context.GetAll());
         }
-
-
-        // GET /projects/test
-        [HttpGet("test")]
-        public string Test()
-        {
-            return "Hello";
-        }
     }
 }

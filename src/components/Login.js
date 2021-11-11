@@ -27,7 +27,7 @@ export default function Login({setToken}) {
     }
 
     return(
-        <div class="login-menu">
+        <div className="login-menu">
             <h2>Please log in!</h2>
             <form onSubmit={handleSubmit}>
                 <label>

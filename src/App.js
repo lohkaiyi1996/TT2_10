@@ -1,6 +1,7 @@
 import './App.css';
 import Login from './components/Login';
 import Projects from './components/Projects';
+import ShowExpenses from './components/showExpenses';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
@@ -19,18 +20,23 @@ function App() {
         <div class='nav-menu'>
         <Link to ="/projects">
             <button type="button">Projects</button>
-          </Link>
+        </Link>
+        <Link to ="/expenses">
+            <button type="button">All Expenses</button>
+        </Link>
         </div>
 
         {/* Start of routes view */}
         <div class="content">
           <Routes>
             <Route path="/projects" element={<Projects />}/> 
+            <Route path="/expenses" element={<ShowExpenses />}/> 
             {/* <Route path="/dashboard" element={<Dashboard />}/>  */}
 
             {/* <Route path="/url_path_name" element={<COMPONENT_NAME />}/>  */}
           </Routes>
         </div>
+        
       </div> {/*closing div*/}
     </Router>  
   )
